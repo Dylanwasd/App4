@@ -15,7 +15,6 @@ public class home extends AppCompatActivity {
     LinearLayout historyView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +38,22 @@ public class home extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        settingsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, settings.class);
+                startActivity(intent);
+            }
+        });
+        historyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, history_list.class);
+                startActivity(intent);
+            }
+        });
 
 
-
+        }
     }
-}
+

@@ -4,11 +4,17 @@ public class History {
     private int id;
     private String history;
     private int historyPoint;
+    private String date;
 
-    public History(int id, String history, int historyPoint) {
+    public History(int id, String history, int historyPoint, String date) {
         this.id = id;
         this.history = history;
         this.historyPoint = historyPoint;
+        this.date = date;
+    }
+
+    public String getDate(){
+        return date;
     }
 
     public int getId() {

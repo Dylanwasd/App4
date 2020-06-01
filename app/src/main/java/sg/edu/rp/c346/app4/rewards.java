@@ -15,7 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class rewards extends AppCompatActivity {
 
@@ -69,20 +72,15 @@ public class rewards extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options, menu);
+        getMenuInflater().inflate(R.menu.options2, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.Add:
+            case R.id.addReward:
                 dialogAddRewards();
-                return true;
-
-        }
-        switch (item.getItemId()) {
-            case R.id.Delete:
                 return true;
 
         }
@@ -99,7 +97,7 @@ public class rewards extends AppCompatActivity {
                 .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         DBHelper dbh = new DBHelper(rewards.this);
-                        dbh.deleteTask(selectReward.getId());
+                        dbh.deleteReward(selectReward.getId());
                         rewards.clear();
                         rewards.addAll(dbh.getReward());
                         aar.notifyDataSetChanged();
@@ -122,7 +120,7 @@ public class rewards extends AppCompatActivity {
 
     public void dialogAddRewards() {
         LayoutInflater factory = LayoutInflater.from(this);
-        final View textEntryView = factory.inflate(R.layout.text_entry, null);
+        final View textEntryView = factory.inflate(R.layout.reward_entry, null);
         final EditText input1 = (EditText) textEntryView.findViewById(R.id.etDialogTask);
         final EditText input2 = (EditText) textEntryView.findViewById(R.id.etDialogPoint);
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -172,6 +170,10 @@ public class rewards extends AppCompatActivity {
                                     points.clear();
                                     points.addAll(dbh.getPointContent());
                                     rewardPoints.setText(Integer.toString(points.get(0)));
+                                    Date c = Calendar.getInstance().getTime();
+                                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                                    String formattedDate = df.format(c);
+                                    dbh.insertHistory(selectReward.getReward(), selectReward.getPoints(), formattedDate);
                                     dbh.close();
                                     Toast.makeText(rewards.this, "Reward claimed", Toast.LENGTH_LONG).show();
                                 } else{

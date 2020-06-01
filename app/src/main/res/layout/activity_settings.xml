@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D7D7D7"
+    android:orientation="vertical"
+    tools:context=".settings">
+
+    <LinearLayout
+        android:id="@+id/changePasswordView"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/changePasswordImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/changePasswordImg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:src="@drawable/change_password">
+
+            </ImageView>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tvChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/overlock"
+            android:text="Change Password"
+            android:textSize="30dp" />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" />
+
+    <LinearLayout
+        android:id="@+id/signOutView"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/signOutImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/signOutImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/circle"
+                android:src="@drawable/logout">
+
+            </ImageView>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/overlock"
+            android:text="Log out"
+            android:textSize="30dp" />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" />
+
+
+
+</LinearLayout>

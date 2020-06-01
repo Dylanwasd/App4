@@ -28,6 +28,7 @@ public class task_list extends AppCompatActivity {
     ArrayList<Task> tasks;
     ArrayList<Integer> points;
     ArrayList<Point> pointList;
+    ArrayList<Integer> pass;
     TaskAdapter aa;
     Task selectedTask;
 
@@ -41,6 +42,7 @@ public class task_list extends AppCompatActivity {
         tasks = new ArrayList<>();
         points = new ArrayList<>();
         pointList = new ArrayList<>();
+        pass = new ArrayList<>();
 
         tasks.addAll(dbh.getTask());
         aa = new TaskAdapter(this, R.layout.row,tasks);
@@ -81,10 +83,6 @@ public class task_list extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.Add:
                 dialogAddTasks();
-                return true;
-
-        }switch (item.getItemId()) {
-            case R.id.Delete:
                 return true;
 
         }
@@ -161,8 +159,9 @@ public class task_list extends AppCompatActivity {
                 .setPositiveButton("Complete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                if(Integer.parseInt(input1.getText().toString()) == 123){
-                                    DBHelper dbh = new DBHelper(task_list.this);
+                                DBHelper dbh = new DBHelper(task_list.this);
+                                pass = dbh.getPassword();
+                                if(Integer.parseInt(input1.getText().toString()) == pass.get(0)){
                                     pointList.clear();
                                     pointList.addAll(dbh.getPoint());
                                     Point left = pointList.get(0);

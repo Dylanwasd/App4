@@ -8,6 +8,8 @@
     tools:context=".history_list">
 
     <ListView
+        android:id="@+id/lvHistory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#D7D7D7" />
 </LinearLayout>

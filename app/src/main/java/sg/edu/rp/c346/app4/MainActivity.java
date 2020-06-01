@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     Button login;
     EditText username;
     EditText password;
+    ArrayList<Person> person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +27,23 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.btnLogin);
         username = findViewById(R.id.editTextName);
         password = findViewById(R.id.editTextPassword);
+        person = new ArrayList<>();
         login.setEnabled(false);
         username.addTextChangedListener(check);
         password.addTextChangedListener(check);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, home.class);
-                startActivity(intent);
+                DBHelper dbh = new DBHelper(MainActivity.this);
+                person = dbh.getPerson();
+                if(username.getText().toString().equals(person.get(0).getName()) && Integer.parseInt(password.getText().toString()) == person.get(0).getPass()){
+                    Intent intent = new Intent(MainActivity.this, home.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainActivity.this, "Incorrect Password/Username", Toast.LENGTH_LONG).show();
+                }
+                dbh.close();
+
             }
         });
 
