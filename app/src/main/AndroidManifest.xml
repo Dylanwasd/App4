@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settings"></activity>
+        <activity android:name=".register"></activity>
+        <activity android:name=".settings" />
         <activity android:name=".rewards" />
         <activity android:name=".history_list" />
         <activity android:name=".task_list" />

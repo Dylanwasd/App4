@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class home extends AppCompatActivity {
 
@@ -13,6 +14,7 @@ public class home extends AppCompatActivity {
     LinearLayout rewardsView;
     LinearLayout settingsView;
     LinearLayout historyView;
+    TextView tvName;
 
 
     @Override
@@ -23,11 +25,20 @@ public class home extends AppCompatActivity {
         rewardsView = findViewById(R.id.ExchangeView);
         settingsView = findViewById(R.id.SettingsView);
         historyView = findViewById(R.id.HistoryView);
+        tvName = findViewById(R.id.tvName);
+        Intent intentReceived = getIntent();
+        final String name = intentReceived.getStringExtra("name");
+        tvName.setText(name);
+        final String pass = intentReceived.getStringExtra("pass");
+        final int id = intentReceived.getIntExtra("id",0);
+
 
         taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(home.this, task_list.class);
+                intent.putExtra("password",pass);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -35,13 +46,17 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(home.this, rewards.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
         settingsView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent(home.this, settings.class);
+                intent.putExtra("settingsName",name);
                 startActivity(intent);
             }
         });

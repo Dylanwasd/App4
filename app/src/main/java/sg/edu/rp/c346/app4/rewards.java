@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,7 @@ public class rewards extends AppCompatActivity {
     ArrayList<Reward> rewards;
     RewardAdapter aar;
     Reward selectReward;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +45,12 @@ public class rewards extends AppCompatActivity {
         rewards.addAll(dbh.getReward());
         aar = new RewardAdapter(this, R.layout.reward_row,rewards);
         lvReward.setAdapter(aar);
+        Intent intentReceived = getIntent();
+        id = intentReceived.getIntExtra("id",0);
+
 
         points.addAll(dbh.getPointContent());
-        rewardPoints.setText(Integer.toString(points.get(0)));
+        rewardPoints.setText(Integer.toString(points.get(id-1)));
         dbh.close();
 
         lvReward.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,14 +167,14 @@ public class rewards extends AppCompatActivity {
                                     DBHelper dbh = new DBHelper(rewards.this);
                                     pointList.clear();
                                     pointList.addAll(dbh.getPoint());
-                                    Point left = pointList.get(0);
+                                    Point left = pointList.get(id-1);
                                     int total = current - cost;
                                     left.setPoints(total);
-                                    left.setId(1);
+                                    left.setId(id);
                                     dbh.updatePoint(left);
                                     points.clear();
                                     points.addAll(dbh.getPointContent());
-                                    rewardPoints.setText(Integer.toString(points.get(0)));
+                                    rewardPoints.setText(Integer.toString(points.get(id-1)));
                                     Date c = Calendar.getInstance().getTime();
                                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                                     String formattedDate = df.format(c);

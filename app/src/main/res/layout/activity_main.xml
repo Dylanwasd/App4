@@ -148,19 +148,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textViewForgetPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="210dp"
-        android:layout_marginLeft="210dp"
-        android:layout_marginTop="10dp"
-        android:text="Forget Password?"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardPassword">
-
-    </TextView>
 
 
     <Button
@@ -173,10 +160,11 @@
         android:background="@drawable/btn_rounded"
         android:text="Log In"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewForgetPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/cardPassword" />
 
 
     <TextView
+        android:id="@+id/registerAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create an Account"

@@ -31,6 +31,8 @@ public class task_list extends AppCompatActivity {
     ArrayList<Integer> pass;
     TaskAdapter aa;
     Task selectedTask;
+    String password;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,12 @@ public class task_list extends AppCompatActivity {
         aa = new TaskAdapter(this, R.layout.row,tasks);
         lvTask.setAdapter(aa);
 
+        Intent intentReceived = getIntent();
+        password = intentReceived.getStringExtra("password");
+        id = intentReceived.getIntExtra("id",0);
+
         points.addAll(dbh.getPointContent());
-        point.setText(Integer.toString(points.get(0)));
+        point.setText(Integer.toString(points.get(id-1)));
         dbh.close();
         lvTask.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -160,21 +166,20 @@ public class task_list extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 DBHelper dbh = new DBHelper(task_list.this);
-                                pass = dbh.getPassword();
-                                if(Integer.parseInt(input1.getText().toString()) == pass.get(0)){
+                                if(input1.getText().toString().equals(password)){
                                     pointList.clear();
                                     pointList.addAll(dbh.getPoint());
-                                    Point left = pointList.get(0);
+                                    Point left = pointList.get(id-1);
                                     int current = Integer.parseInt(point.getText().toString());
                                     int total = current + selectedTask.getPoint();
                                     left.setPoints(total);
-                                    left.setId(1);
+                                    left.setId(id);
                                     dbh.updatePoint(left);
                                     dbh.deleteTask(selectedTask.getId());
 
                                     points.clear();
                                     points.addAll(dbh.getPointContent());
-                                    point.setText(Integer.toString(points.get(0)));
+                                    point.setText(Integer.toString(points.get(id-1)));
                                     tasks.clear();
                                     tasks.addAll(dbh.getTask());
                                     aa.notifyDataSetChanged();

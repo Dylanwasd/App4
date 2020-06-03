@@ -42,25 +42,33 @@
                 android:textSize="18sp">
 
             </TextView>
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src ="@drawable/points">
 
-            </ImageView>
-            <TextView
-                android:id = "@+id/tvHistoryPoints"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:text="Points"
-                android:textSize="24sp">
+            <LinearLayout
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src ="@drawable/points">
 
-            </TextView>
+                </ImageView>
+                <TextView
+                    android:id = "@+id/tvHistoryPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Points"
+                    android:textSize="24sp">
+
+                </TextView>
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,9 @@ public class settings extends AppCompatActivity {
     LinearLayout change;
     ArrayList<Integer> password;
     ArrayList<Person> people;
+    Boolean found;
+    int index;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class settings extends AppCompatActivity {
         change = findViewById(R.id.changePasswordView);
         password = new ArrayList<>();
         people = new ArrayList<>();
+        Intent intentReceived = getIntent();
+        name = intentReceived.getStringExtra("settingsName");
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,36 +54,44 @@ public class settings extends AppCompatActivity {
     }
     public void changePassword(){
         LayoutInflater factory = LayoutInflater.from(this);
+        found = false;
         final View textEntryView = factory.inflate(R.layout.password_entry, null);
         final EditText input1 = (EditText) textEntryView.findViewById(R.id.etDialogTask);
         final EditText input2 = (EditText) textEntryView.findViewById(R.id.etDialogPoint);
         final EditText input3 = (EditText) textEntryView.findViewById(R.id.etDialogPassword2);
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle("Enter the task and allocate the points:")
+        alert.setTitle("Change password")
                 .setView(textEntryView)
-                .setPositiveButton("Add",
+                .setPositiveButton("Change password",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
+                                index = -1;
                                 DBHelper dbh = new DBHelper(settings.this);
-                                password = dbh.getPassword();
+                                people.clear();
+                                people.addAll(dbh.getPerson());
                                 int oldPass = Integer.parseInt(input1.getText().toString());
                                 int newPass = Integer.parseInt(input2.getText().toString());
                                 int confirmNewPass = Integer.parseInt(input3.getText().toString());
-                                if(oldPass == password.get(0)){
-                                    if(newPass == confirmNewPass){
-                                        people.clear();
-                                        people.addAll(dbh.getPerson());
-                                        Person user = people.get(0);
+                                for (int i = 0; i<people.size(); i++){
+                                    if(name.equals(people.get(i).getName()) && oldPass == people.get(i).getPass()){
+                                        found = true;
+                                        index = i;
+                                    }
+
+                                }
+                                if (found == true) {
+                                    if (newPass == confirmNewPass) {
+                                        Person user = people.get(index);
                                         user.setPass(newPass);
                                         dbh.updatePassword(user);
                                         dbh.close();
                                         Toast.makeText(settings.this, "Password changed", Toast.LENGTH_LONG).show();
-                                    }else{
+                                    } else {
                                         Toast.makeText(settings.this, "New Password do not match", Toast.LENGTH_LONG).show();
                                     }
                                 }else{
-                                    Toast.makeText(settings.this, "Old Password Incorrect", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(settings.this, "Incorrect username/password", Toast.LENGTH_LONG).show();
                                 }
 
                             }

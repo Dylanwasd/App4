@@ -1,6 +1,8 @@
 package sg.edu.rp.c346.app4;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private int id;
     private String name;
     private int pass;

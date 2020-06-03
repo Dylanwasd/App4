@@ -180,7 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public ArrayList<History> getHistory() {
         ArrayList<History> history = new ArrayList<History>();
-        String selectQuery = "SELECT id, history_reward, history_point, date FROM " + TABLE_HISTORY;
+        String selectQuery = "SELECT id, history_reward, history_point, date FROM " + TABLE_HISTORY + " ORDER BY id DESC";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -47,7 +47,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
-                android:text="Points"
+                android:text="0"
                 android:textSize="24sp">
 
             </TextView>
